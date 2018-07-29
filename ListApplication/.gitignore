@@ -63,3 +63,6 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+/dump
+/.ideal/*
+>>>>>>> dd25ae94cd1b5eb646431cdb817326ab78e28f76
