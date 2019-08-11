@@ -50,7 +50,18 @@ class ProgressButton @JvmOverloads constructor(
         }
 
         override fun draw(canvas: Canvas, text: CharSequence?, start: Int, end: Int, x: Float, top: Int, y: Int, bottom: Int, paint: Paint) {
-            super.draw(canvas, text, start, end, x, top, y, bottom, paint)
+
+            canvas.save()
+            val fontMetrics = paint.fontMetricsInt
+            val lineHeight = fontMetrics.bottom - fontMetrics.top
+            val centerY = y + fontMetrics.bottom - lineHeight / 2
+            val transY = centerY - drawable.bounds.height() / 2
+
+            canvas.translate(x, transY.toFloat())
+
+            drawable.draw(canvas)
+            canvas.restore()
+            //super.draw(canvas, text, start, end, x, top, y, bottom, paint)
         }
     }
 
@@ -80,6 +91,10 @@ class ProgressButton @JvmOverloads constructor(
             progressDrawable.callback = callback
             text = spannableString
         }
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
 
 }
